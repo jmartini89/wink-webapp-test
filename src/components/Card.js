@@ -12,7 +12,10 @@ function Card({id, title, description, link, thumbnail}) {
         <div className="card-block px-2">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
-            <a href={link} className="btn btn-primary">infoLink</a>
+            <a 
+              href={link}
+              className="btn btn-primary">infoLink
+            </a>
         </div>
         <div className="w-100"></div>
     </div>

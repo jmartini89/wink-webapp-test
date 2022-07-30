@@ -2,10 +2,6 @@ import React from 'react';
 import Card from './Card';
 
 function SearchList({data}) {
-  if (data === null) {
-    return;
-  }
-
   function getThumbnail(book) {
     return (
       (book.volumeInfo && book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail)
