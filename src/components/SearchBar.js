@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
-const dataFetch = axios.create({
-  baseURL: "https://www.googleapis.com/books/v1/volumes?q="
-});
-
-function SearchBar({query, itemsLimit, setQuery, setItems, setTotalItems}) {
+function SearchBar({query, setQuery, setTotalItems, fetchData}) {
   const [queryDebounce, setQueryDebounce] = useState("");
 
   useEffect(() => {
@@ -18,19 +13,10 @@ function SearchBar({query, itemsLimit, setQuery, setItems, setTotalItems}) {
   useEffect(() => {
     if (!query.length) {
       setTotalItems(0);
+      return;
     }
-    else {
-      dataFetch.get(query + "&maxResults=" + itemsLimit)
-      .then(response => {
-        setTotalItems(parseInt(response.data.totalItems));
-        setItems(response.data.items);
-      })
-      .catch((exception) => {
-        console.log(exception);
-        setTotalItems(0);
-      })
-    }
-  }, [query, itemsLimit, setItems, setTotalItems]);
+    fetchData();
+  }, [query, setTotalItems, fetchData]);
 
   return (
     <div className='container'>
