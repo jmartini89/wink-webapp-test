@@ -1,37 +1,35 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import SearchList from './SearchList';
 
-function SearchBar() {
-  const [searchField, setSearchField] = useState("");
-  const [items, setItems] = useState([]);
-  const [totalItems, setTotalItems] = useState(0);
-  const [itemsLimit, setItemsLimit] = useState(5);
+function SearchBar({query, itemsLimit, setQuery, setItems, setTotalItems}) {
+  const [queryDebounce, setQueryDebounce] = useState("");
+  const dataFetch = axios.create({
+    baseURL: "https://www.googleapis.com/books/v1/volumes?q="
+  });
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (!searchField.length) {
+    const timer = setTimeout(() => {
+      setQuery(queryDebounce);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [queryDebounce, setQuery]);
+
+  useEffect(() => {
+    if (!query.length) {
+      setTotalItems(0);
+    }
+    else {
+      dataFetch.get(query + "&maxResults=" + itemsLimit)
+      .then(response => {
+        setTotalItems(parseInt(response.data.totalItems));
+        setItems(response.data.items);
+      })
+      .catch((exception) => {
+        console.log(exception);
         setTotalItems(0);
-      }
-      else {
-        console.log(searchField);
-        axios.get(
-          "https://www.googleapis.com/books/v1/volumes?q=" + searchField
-          + "&maxResults=" + itemsLimit)
-        .then(response => {
-          if (searchField.length) {
-            setTotalItems(parseInt(response.data.totalItems));
-            setItems(response.data.items);
-          }
-        })
-        .catch((exception) => {
-          console.log(exception);
-          setTotalItems(0);
-        })
-      }
-    }, 1250);
-    return () => clearTimeout(timeoutId);
-  }, [searchField, itemsLimit]);
+      })
+    }
+  }, [query, itemsLimit, setItems, setTotalItems]);
 
   return (
     <div className='container'>
@@ -42,19 +40,11 @@ function SearchBar() {
             className='form-control'
             type='search'
             placeholder='Search for books'
-            onInput={(e) => {setSearchField(e.target.value)}}
-            onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+            onInput={(e) => {setQueryDebounce(e.target.value)}}
+            onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
             />
         </div>
-        <select
-          className='custom-select'
-          value={itemsLimit}
-          onChange={(e) => {setItemsLimit(e.target.value)}}>
-          {[5, 10, 15, 20].map(x => <option key={x} value={x}>{x}</option>)}
-        </select>
       </form>
-      {totalItems ? <SearchList data={items} /> : null}
-      {console.log(totalItems)}
     </div>
   );
 }
