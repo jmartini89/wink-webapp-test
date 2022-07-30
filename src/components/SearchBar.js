@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const dataFetch = axios.create({
+  baseURL: "https://www.googleapis.com/books/v1/volumes?q="
+});
+
 function SearchBar({query, itemsLimit, setQuery, setItems, setTotalItems}) {
   const [queryDebounce, setQueryDebounce] = useState("");
-  const dataFetch = axios.create({
-    baseURL: "https://www.googleapis.com/books/v1/volumes?q="
-  });
 
   useEffect(() => {
     const timer = setTimeout(() => {

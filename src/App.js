@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import SearchBar from './components/SearchBar';
+import SearchLimit from './components/SearchLimit';
 import SearchList from './components/SearchList';
 
 function App() {
@@ -18,7 +19,11 @@ function App() {
         setItems={setItems}
         setTotalItems={setTotalItems}
       />
-      {totalItems && query.length ? <SearchList data={items} /> : null}
+      <SearchLimit
+        itemsLimit={itemsLimit}
+        setItemsLimit={setItemsLimit}
+      />
+      {query.length && totalItems ? <SearchList data={items} /> : null}
     </div>
   );
 }
