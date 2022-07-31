@@ -1,10 +1,10 @@
-function SearchLimit({itemsLimit, setItemsLimit}) {
+function SearchLimit({itemsPerPage, setItemsPerPage}) {
   return (
     <div className='container'>
       <select
         className='custom-select'
-        value={itemsLimit}
-        onChange={(e) => {setItemsLimit(e.target.value)}}
+        value={itemsPerPage}
+        onChange={(e) => {setItemsPerPage(e.target.value)}}
       >
         {[5, 10, 15, 20].map(x => <option key={x} value={x}>{x}</option>)}
       </select>

@@ -1,12 +1,15 @@
-import React from 'react';
 import Card from './Card';
+import logo from '../logo.svg'
 
-function SearchList({data}) {
-  function getThumbnail(book) {
-    return (
-      (book.volumeInfo && book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail)
-      ? book.volumeInfo.imageLinks.thumbnail : null
-    )
+function SearchList({data, queryLenght, totalItems, fetchStatus}) {
+  if (fetchStatus.error) {
+    return <h4>Something went wrong!</h4>;
+  }
+  if (fetchStatus.loading) {
+    return <img src={logo} className="App-logo" alt="logo" />;
+  }
+  if (!queryLenght || !totalItems || !data) {
+    return null;
   }
 
   return (
@@ -18,7 +21,10 @@ function SearchList({data}) {
             title = {book.volumeInfo.title}
             description = {book.volumeInfo.description}
             link = {book.volumeInfo.infoLink}
-            thumbnail = {getThumbnail(book)}
+            thumbnail = {
+              book.volumeInfo && book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
+              ? book.volumeInfo.imageLinks.thumbnail : null
+            }
           />
         </div>
       )

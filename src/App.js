@@ -1,56 +1,54 @@
 import './App.css';
-import { useCallback, useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchBar from './components/SearchBar';
 import SearchLimit from './components/SearchLimit';
 import SearchList from './components/SearchList';
-// import Paginator from './components/Paginator';
-
-const client = axios.create({
-  baseURL: "https://www.googleapis.com/books/v1/volumes?q="
-});
+import Pagination from './components/Pagination';
 
 function App() {
-  // const [index, setIndex] = useState(1);
+  const apiUrl = "https://www.googleapis.com/books/v1/volumes?q=";
   const [query, setQuery] = useState("");
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
-  const [itemsLimit, setItemsLimit] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fetchStatus, setFetchStatus] = useState({
+    error: false,
+    loading: false
+  });
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log(query, itemsPerPage, currentPage);
+        setFetchStatus((state) => ({...state, loading: true}));
+        const response = await axios.get(apiUrl + query + "&maxResults=" + itemsPerPage + "&startIndex=" + (itemsPerPage * (currentPage - 1)));
+          setTotalItems(() => parseInt(response.data.totalItems));
+          setItems(() => response.data.items);
+        setFetchStatus((state) => ({...state, loading: false}));
+      }
+      catch(err) {
+        console.error(err);
+        setFetchStatus(() => ({error: err, loading: false}));
+        setTotalItems(() => 0);
+      }
+    }
 
-  const fetchData = useCallback(() => {
-    client.get(query + "&maxResults=" + itemsLimit)
-    .then(response => {
-      setTotalItems(parseInt(response.data.totalItems));
-      setItems(response.data.items);
-    })
-    .catch((exception) => {
-      console.log(exception);
-      setTotalItems(0);
-    })
-  }, [itemsLimit, query])
+    if (!query.length) {
+      setTotalItems(() => 0);
+      return;
+    }
+
+    fetchData();
+  }, [query, itemsPerPage, currentPage]);
 
   return (
     <div className='container'>
-
-      <SearchBar
-        query={query}
-        setQuery={setQuery}
-        setTotalItems={setTotalItems}
-        fetchData={fetchData}
-      />
-
-      <SearchLimit
-        itemsLimit={itemsLimit}
-        setItemsLimit={setItemsLimit}
-      />
-
-      {query.length && totalItems ? <SearchList data={items} /> : null}
-
-      {/* <Paginator
-        totalItems={totalItems}
-        itemsLimit={itemsLimit}
-      /> */}
-
+      <SearchBar setQuery={setQuery} setCurrentPage={setCurrentPage} />
+      <SearchLimit itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} />
+      <Pagination setCurrentPage={setCurrentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} />
+      <SearchList data={items} queryLenght={query.length} totalItems={totalItems} fetchStatus={fetchStatus}/>
     </div>
   );
 }

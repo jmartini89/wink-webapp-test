@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Card({id, title, description, link, thumbnail}) {
   return(
     <div className="card flex-row flex-wrap" key={id}>

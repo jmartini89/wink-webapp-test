@@ -1,22 +1,15 @@
 import { useState, useEffect } from 'react';
 
-function SearchBar({query, setQuery, setTotalItems, fetchData}) {
+function SearchBar({setQuery, setCurrentPage}) {
   const [queryDebounce, setQueryDebounce] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setQuery(queryDebounce);
-    }, 250);
+      setQuery(() => queryDebounce);
+      setCurrentPage(() => 1);
+    }, 500);
     return () => clearTimeout(timer);
-  }, [queryDebounce, setQuery]);
-
-  useEffect(() => {
-    if (!query.length) {
-      setTotalItems(0);
-      return;
-    }
-    fetchData();
-  }, [query, setTotalItems, fetchData]);
+  }, [queryDebounce, setQuery, setCurrentPage]);
 
   return (
     <div className='container'>
