@@ -1,4 +1,4 @@
-function SearchLimit({itemsPerPage, setItemsPerPage}) {
+function ResultsPerPage({itemsPerPage, setItemsPerPage}) {
   return (
     <div className='container'>
       <select
@@ -12,4 +12,4 @@ function SearchLimit({itemsPerPage, setItemsPerPage}) {
   );
 }
 
-export default SearchLimit;
+export default ResultsPerPage;

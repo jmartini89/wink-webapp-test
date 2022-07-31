@@ -1,7 +1,7 @@
 import Card from './Card';
 import logo from '../logo.svg'
 
-function SearchList({data, queryLenght, totalItems, fetchStatus}) {
+function ResultsList({data, queryLenght, totalItems, fetchStatus}) {
   if (fetchStatus.error) {
     return <h4>Something went wrong!</h4>;
   }
@@ -32,4 +32,4 @@ function SearchList({data, queryLenght, totalItems, fetchStatus}) {
   );
 }
 
-export default SearchList;
+export default ResultsList;

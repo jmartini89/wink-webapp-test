@@ -2,8 +2,8 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchBar from './components/SearchBar';
-import SearchLimit from './components/SearchLimit';
-import SearchList from './components/SearchList';
+import ResultsPerPage from './components/ResultsPerPage';
+import ResultsList from './components/ResultsList';
 import Pagination from './components/Pagination';
 
 function App() {
@@ -13,10 +13,7 @@ function App() {
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const [fetchStatus, setFetchStatus] = useState({
-    error: false,
-    loading: false
-  });
+  const [fetchStatus, setFetchStatus] = useState({error: false, loading: false});
   
   useEffect(() => {
     const fetchData = async () => {
@@ -24,13 +21,13 @@ function App() {
         console.log(query, itemsPerPage, currentPage);
         setFetchStatus((state) => ({...state, loading: true}));
         const response = await axios.get(apiUrl + query + "&maxResults=" + itemsPerPage + "&startIndex=" + (itemsPerPage * (currentPage - 1)));
-          setTotalItems(() => parseInt(response.data.totalItems));
-          setItems(() => response.data.items);
-        setFetchStatus((state) => ({...state, loading: false}));
+        setTotalItems(() => parseInt(response.data.totalItems));
+        setItems(() => response.data.items);
+        setFetchStatus((state) => ({error: false, loading: false}));
       }
       catch(err) {
         console.error(err);
-        setFetchStatus(() => ({error: err, loading: false}));
+        setFetchStatus(() => ({error: true, loading: false}));
         setTotalItems(() => 0);
       }
     }
@@ -46,9 +43,9 @@ function App() {
   return (
     <div className='container'>
       <SearchBar setQuery={setQuery} setCurrentPage={setCurrentPage} />
-      <SearchLimit itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} />
+      <ResultsPerPage itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} />
       <Pagination setCurrentPage={setCurrentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} />
-      <SearchList data={items} queryLenght={query.length} totalItems={totalItems} fetchStatus={fetchStatus}/>
+      <ResultsList data={items} queryLenght={query.length} totalItems={totalItems} fetchStatus={fetchStatus}/>
     </div>
   );
 }
