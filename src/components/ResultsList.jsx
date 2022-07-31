@@ -15,17 +15,8 @@ function ResultsList({data, queryLenght, totalItems, fetchStatus}) {
   return (
     data.map(book => {
       return (
-        <div key = {book.id}>
-          <Card
-            id = {book.id}
-            title = {book.volumeInfo.title}
-            description = {book.volumeInfo.description}
-            link = {book.volumeInfo.infoLink}
-            thumbnail = {
-              book.volumeInfo && book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
-              ? book.volumeInfo.imageLinks.thumbnail : null
-            }
-          />
+        <div key={book.id}>
+          <Card item={book} />
         </div>
       )
     })

@@ -1,6 +1,8 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { Outlet } from "react-router-dom";
 import axios from 'axios';
+
 import SearchBar from './components/SearchBar';
 import ResultsPerPage from './components/ResultsPerPage';
 import ResultsList from './components/ResultsList';
@@ -20,10 +22,10 @@ function App() {
       try {
         console.log(query, itemsPerPage, currentPage);
         setFetchStatus((state) => ({...state, loading: true}));
-        const response = await axios.get(apiUrl + query + "&maxResults=" + itemsPerPage + "&startIndex=" + (itemsPerPage * (currentPage - 1)));
+        const response = await axios.get(`${apiUrl}${query}&maxResults=${itemsPerPage}&startIndex=${(itemsPerPage * (currentPage - 1))}`);
         setTotalItems(() => parseInt(response.data.totalItems));
         setItems(() => response.data.items);
-        setFetchStatus((state) => ({error: false, loading: false}));
+        setFetchStatus(() => ({error: false, loading: false}));
       }
       catch(err) {
         console.error(err);
@@ -46,6 +48,7 @@ function App() {
       <ResultsPerPage itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} />
       <Pagination setCurrentPage={setCurrentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} />
       <ResultsList data={items} queryLenght={query.length} totalItems={totalItems} fetchStatus={fetchStatus}/>
+      <Outlet />
     </div>
   );
 }
