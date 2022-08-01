@@ -10,6 +10,7 @@ import './App.css';
 function App() {
   const apiUrl = "https://www.googleapis.com/books/v1/volumes?q=";
   const [query, setQuery] = useState("");
+  const [index, setIndex] = useState(0);
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -20,7 +21,12 @@ function App() {
     const fetchData = async () => {
       try {
         setFetchStatus((state) => ({...state, loading: true}));
-        const response = await axios.get(`${apiUrl}${query}&maxResults=${itemsPerPage}&startIndex=${(itemsPerPage * (currentPage - 1))}`);
+        const response = await axios.get(
+          `${apiUrl}${query}&maxResults=${itemsPerPage}&startIndex=${index}`
+        );
+
+        console.log(`${apiUrl}${query}&maxResults=${itemsPerPage}&startIndex=${index}`);
+
         setTotalItems(() => Math.ceil(response.data.totalItems / currentPage));
         setItems(() => response.data.items);
         setFetchStatus(() => ({error: false, loading: false}));
@@ -39,11 +45,12 @@ function App() {
     }
     
     fetchData();
-  }, [query, itemsPerPage, currentPage]);
+  }, [query, itemsPerPage, currentPage, index]);
 
   return (
     <div>
-            <Paginator
+      <Paginator
+        setIndex={setIndex}
         data={items}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

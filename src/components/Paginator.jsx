@@ -1,7 +1,7 @@
 import { Container, Row } from 'react-bootstrap';
 import Pagination from 'react-bootstrap/Pagination'
 
-const Paginator = ({data, currentPage, setCurrentPage, totalItems, itemsPerPage}) => {
+const Paginator = ({setIndex, data, currentPage, setCurrentPage, totalItems, itemsPerPage}) => {
   const maxIndexes = 5;
   const initIndex = (
     currentPage > Math.ceil(maxIndexes / 2)
@@ -14,7 +14,15 @@ const Paginator = ({data, currentPage, setCurrentPage, totalItems, itemsPerPage}
     return;
   }
 
-  console.log(itemsPerPage, totalItems, (totalItems + itemsPerPage) > (currentPage * itemsPerPage));
+  // console.log(itemsPerPage, totalItems, (totalItems + itemsPerPage) > (currentPage * itemsPerPage));
+
+  const handleClick = (moveToPage) => {
+    const test = itemsPerPage * (moveToPage - 1);
+    console.log(test);
+    setIndex(test);
+    setCurrentPage(moveToPage);
+  }
+
   const setButton = (number, moveToPage, label) => {
     return (
       <Pagination.Item
@@ -25,7 +33,7 @@ const Paginator = ({data, currentPage, setCurrentPage, totalItems, itemsPerPage}
           || (number === 0 && currentPage === 1)
         }
         activeLabel={false}
-        onClick={() => setCurrentPage(moveToPage)}
+        onClick={() => handleClick(moveToPage)}
       >
         {label ? label : number}
       </Pagination.Item>
