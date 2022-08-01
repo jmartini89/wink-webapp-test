@@ -24,6 +24,7 @@ function App() {
         setTotalItems(() => parseInt(response.data.totalItems));
         setItems(() => response.data.items);
         setFetchStatus(() => ({error: false, loading: false}));
+        window.scrollTo(0, 0);
       }
       catch(err) {
         console.error(err);
@@ -31,12 +32,12 @@ function App() {
         setTotalItems(() => 0);
       }
     }
-
+    
     if (!query.length) {
       setTotalItems(() => 0);
       return;
     }
-
+    
     fetchData();
   }, [query, itemsPerPage, currentPage]);
 
