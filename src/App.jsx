@@ -1,12 +1,11 @@
-import './App.css';
 import { useState, useEffect } from 'react';
-import { Outlet } from "react-router-dom";
 import axios from 'axios';
 
-import SearchBar from './components/SearchBar';
-import ResultsPerPage from './components/ResultsPerPage';
 import ResultsList from './components/ResultsList';
 import Pagination from './components/Pagination';
+
+import './App.css';
+import TopBar from './components/TopBar';
 
 function App() {
   const apiUrl = "https://www.googleapis.com/books/v1/volumes?q=";
@@ -16,11 +15,10 @@ function App() {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [fetchStatus, setFetchStatus] = useState({error: false, loading: false});
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(query, itemsPerPage, currentPage);
         setFetchStatus((state) => ({...state, loading: true}));
         const response = await axios.get(`${apiUrl}${query}&maxResults=${itemsPerPage}&startIndex=${(itemsPerPage * (currentPage - 1))}`);
         setTotalItems(() => parseInt(response.data.totalItems));
@@ -43,12 +41,15 @@ function App() {
   }, [query, itemsPerPage, currentPage]);
 
   return (
-    <div className='container'>
-      <SearchBar setQuery={setQuery} setCurrentPage={setCurrentPage} />
-      <ResultsPerPage itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} />
-      <Pagination setCurrentPage={setCurrentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} />
+    <div>
+      <TopBar
+        setQuery={setQuery}
+        setCurrentPage={setCurrentPage}
+        itemsPerPage={itemsPerPage}
+        setItemsPerPage={setItemsPerPage}
+      />
       <ResultsList data={items} queryLenght={query.length} totalItems={totalItems} fetchStatus={fetchStatus}/>
-      <Outlet />
+      {/* <Pagination setCurrentPage={setCurrentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} /> */}
     </div>
   );
 }

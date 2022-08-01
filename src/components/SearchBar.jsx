@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Form, FormControl } from 'react-bootstrap';
 
-function SearchBar({setQuery, setCurrentPage}) {
+const SearchBar = ({setQuery, setCurrentPage}) => {
   const [queryDebounce, setQueryDebounce] = useState("");
 
   useEffect(() => {
@@ -12,20 +13,15 @@ function SearchBar({setQuery, setCurrentPage}) {
   }, [queryDebounce, setQuery, setCurrentPage]);
 
   return (
-    <div className='container'>
-      <h1>BOOKS</h1>
-      <form>
-        <div className='form-group'>
-          <input
-            className='form-control'
-            type='search'
-            placeholder='Search for books'
-            onInput={(e) => {setQueryDebounce(e.target.value)}}
-            onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
-            />
-        </div>
-      </form>
-    </div>
+    <Form>
+      <FormControl
+        type='search'
+        placeholder="Search for books"
+        className="SearchBar"
+        onInput={(e) => {setQueryDebounce(e.target.value)}}
+        onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
+      />
+    </Form>
   );
 }
 

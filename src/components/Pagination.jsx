@@ -1,4 +1,4 @@
-function Pagination({setCurrentPage, totalItems, itemsPerPage}) {
+const Pagination = ({setCurrentPage, totalItems, itemsPerPage}) => {
   const pageNumbers = Array.from({length: Math.ceil(totalItems / itemsPerPage)}, (_, i) => i + 1);
 
   return (
