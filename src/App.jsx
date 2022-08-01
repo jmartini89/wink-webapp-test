@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import TopBar from './components/TopBar';
 import ResultsList from './components/ResultsList';
-import Pagination from './components/Pagination';
+import Paginator from './components/Paginator';
 
 import './App.css';
 
@@ -57,11 +57,12 @@ function App() {
         fetchStatus={fetchStatus}
       />
 
-      {/* <Pagination
+      <Paginator
+        currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
-      /> */}
+      />
     </div>
   );
 }
