@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import ResultsList from './components/ResultsList';
+import FormResultsList from './components/ResultsList';
 import Pagination from './components/Pagination';
 
 import './App.css';
@@ -12,7 +12,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [fetchStatus, setFetchStatus] = useState({error: false, loading: false});
 
@@ -47,9 +47,22 @@ function App() {
         setCurrentPage={setCurrentPage}
         itemsPerPage={itemsPerPage}
         setItemsPerPage={setItemsPerPage}
+        fetchStatus={fetchStatus}
       />
-      <ResultsList data={items} queryLenght={query.length} totalItems={totalItems} fetchStatus={fetchStatus}/>
-      {/* <Pagination setCurrentPage={setCurrentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} /> */}
+
+      <FormResultsList
+        data={items}
+        queryLenght={query.length}
+        totalItems={totalItems}
+        fetchStatus={fetchStatus
+        }
+      />
+
+      {/* <Pagination
+        setCurrentPage={setCurrentPage}
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+      /> */}
     </div>
   );
 }

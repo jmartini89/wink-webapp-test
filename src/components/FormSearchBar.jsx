@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Form, FormControl } from 'react-bootstrap';
 
-const SearchBar = ({setQuery, setCurrentPage}) => {
+const FormSearchBar = ({setQuery, setCurrentPage}) => {
   const [queryDebounce, setQueryDebounce] = useState("");
 
   useEffect(() => {
@@ -25,4 +25,4 @@ const SearchBar = ({setQuery, setCurrentPage}) => {
   );
 }
 
-export default SearchBar;
+export default FormSearchBar;

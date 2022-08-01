@@ -1,9 +1,8 @@
 import { useState } from 'react';
+import { Container } from 'react-bootstrap';
 
-import Card from './Card';
+import CardBook from './CardBook';
 import DetailsModal from "./DetailsModal";
-
-import logo from '../logo.svg'
 
 const ResultsList = ({data, queryLenght, totalItems, fetchStatus}) => {
   const [show, setShow] = useState(false);
@@ -11,9 +10,6 @@ const ResultsList = ({data, queryLenght, totalItems, fetchStatus}) => {
 
   if (fetchStatus.error) {
     return <h4>Something went wrong!</h4>;
-  }
-  else if (fetchStatus.loading) {
-    return <img src={logo} className="App-logo" alt="logo" />;
   }
   else if (!queryLenght || !totalItems || !data) {
     return null;
@@ -23,9 +19,9 @@ const ResultsList = ({data, queryLenght, totalItems, fetchStatus}) => {
     <>
       {data.map((book, index) => {
         return (
-          <div key={index}>
-            <Card item={book} index={index} setShow={setShow} setItemIndex={setItemIndex} />
-          </div>
+          <Container key={index}>
+              <CardBook item={book} index={index} setShow={setShow} setItemIndex={setItemIndex} />
+          </Container>
         )
       })}
 

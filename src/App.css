@@ -1,10 +1,32 @@
 body {
-  padding-top: 70px;
-  background-color: rgb(44, 33, 33);
+  padding-top: 100px;
+  overflow-y: scroll;
 }
 
-.App {
-  text-align: center;
+.TopBar {
+  padding: 20px;
+  min-width: 100%;
+  background: #4178ac;
+}
+
+.CardTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.CardDescription {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.CardImageDescription {
+  display: flex;
 }
 
 .App-logo {
@@ -16,21 +38,6 @@ body {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {

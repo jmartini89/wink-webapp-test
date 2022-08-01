@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 
-const ResultsPerPage = ({itemsPerPage, setItemsPerPage}) => {
+const FormResultsPerPage = ({itemsPerPage, setItemsPerPage}) => {
   return (
     <Form>
       <Form.Group controlId="exampleForm.SelectCustom">
@@ -17,4 +17,4 @@ const ResultsPerPage = ({itemsPerPage, setItemsPerPage}) => {
   );
 }
 
-export default ResultsPerPage;
+export default FormResultsPerPage;
