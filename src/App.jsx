@@ -43,6 +43,13 @@ function App() {
 
   return (
     <div>
+            <Paginator
+        data={items}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+      />
       <TopBar
         setQuery={setQuery}
         setCurrentPage={setCurrentPage}
@@ -58,12 +65,7 @@ function App() {
         fetchStatus={fetchStatus}
       />
 
-      <Paginator
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-      />
+
     </div>
   );
 }
