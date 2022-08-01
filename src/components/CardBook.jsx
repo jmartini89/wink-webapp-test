@@ -10,12 +10,16 @@ const CardBook = ({item, setShow, index, setItemIndex}) => {
   }
 
   return(
-    <Container className="shadow p-3 mb-5 bg-white rounded">
+    <Container
+      className="shadow p-3 mb-5 bg-white rounded"
+      variant="outline-dark"
+      style={{ cursor: "pointer" }}
+      onClick={() => handleClick()}
+    >
       <Card border="light">
         <Card.Header as="h5">{book.title}</Card.Header>
         <Card.Body>
-          <Card.Text className="CardDescription">{book.description}</Card.Text>
-          <Button className="col" variant="outline-dark" onClick={() => handleClick()}>Details</Button>
+          <Card.Text className="CardDescription">{book.description ? book.description : "No description provided"}</Card.Text>
         </Card.Body>
       </Card>
     </Container>
