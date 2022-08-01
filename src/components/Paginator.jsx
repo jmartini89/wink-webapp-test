@@ -1,9 +1,13 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import Pagination from 'react-bootstrap/Pagination'
 
-const Paginator = ({currentPage, setCurrentPage, totalItems, itemsPerPage}) => {
-  const maxPages =  Math.ceil(totalItems / itemsPerPage);
-  const maxIndexes = 3;
+const Paginator = ({currentPage, setCurrentPage, totalItems}) => {
+  const maxIndexes = 5;
+  const initIndex = (
+    currentPage > Math.ceil(maxIndexes / 2)
+    ? currentPage - Math.ceil(maxIndexes / 2)
+    : 0
+  );
   let items = [];
 
   if (!totalItems) {
@@ -27,11 +31,11 @@ const Paginator = ({currentPage, setCurrentPage, totalItems, itemsPerPage}) => {
     );
   }
 
-  items.push(setButton(0, currentPage - 1, "<"));
+  items.push(setButton(initIndex, currentPage - 1, "<"));
   for (let number = 1; number <= maxIndexes; number++) {
-    items.push(setButton(number, number, ""));
+    items.push(setButton(initIndex + number, initIndex + number, ""));
   }
-  items.push(setButton(maxIndexes + 1, currentPage + 1, ">"));
+  items.push(setButton(initIndex + maxIndexes + 1, currentPage + 1, ">"));
 
   return (
     <Container>

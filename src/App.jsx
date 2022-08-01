@@ -61,7 +61,6 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
       />
     </div>
   );
