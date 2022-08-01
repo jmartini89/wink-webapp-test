@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import TopBar from './components/TopBar';
-import FormResultsList from './components/ResultsList';
+import ResultsList from './components/ResultsList';
 import Pagination from './components/Pagination';
 
 import './App.css';
@@ -50,12 +50,11 @@ function App() {
         fetchStatus={fetchStatus}
       />
 
-      <FormResultsList
+      <ResultsList
         data={items}
         queryLenght={query.length}
         totalItems={totalItems}
-        fetchStatus={fetchStatus
-        }
+        fetchStatus={fetchStatus}
       />
 
       {/* <Pagination
