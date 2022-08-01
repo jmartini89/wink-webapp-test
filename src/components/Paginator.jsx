@@ -1,7 +1,7 @@
 import { Container, Row } from 'react-bootstrap';
 import Pagination from 'react-bootstrap/Pagination'
 
-const Paginator = ({currentPage, setCurrentPage, totalItems}) => {
+const Paginator = ({currentPage, setCurrentPage, totalItems, itemsPerPage}) => {
   const maxIndexes = 5;
   const initIndex = (
     currentPage > Math.ceil(maxIndexes / 2)
@@ -19,12 +19,12 @@ const Paginator = ({currentPage, setCurrentPage, totalItems}) => {
       <Pagination.Item
         key={number}
         active={label ? false : number === currentPage}
-        activeLabel={false}
-        onClick={
-          number === 0 && currentPage === 1
-          ? null
-          : () => setCurrentPage(moveToPage)
+        disabled={
+          !((totalItems + itemsPerPage) > (number * itemsPerPage))
+          || (number === 0 && currentPage === 1)
         }
+        activeLabel={false}
+        onClick={() => setCurrentPage(moveToPage)}
       >
         {label ? label : number}
       </Pagination.Item>

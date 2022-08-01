@@ -21,7 +21,7 @@ function App() {
       try {
         setFetchStatus((state) => ({...state, loading: true}));
         const response = await axios.get(`${apiUrl}${query}&maxResults=${itemsPerPage}&startIndex=${(itemsPerPage * (currentPage - 1))}`);
-        setTotalItems(() => parseInt(response.data.totalItems));
+        setTotalItems(() => Math.ceil(response.data.totalItems / currentPage));
         setItems(() => response.data.items);
         setFetchStatus(() => ({error: false, loading: false}));
         window.scrollTo(0, 0);
@@ -62,6 +62,7 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
       />
     </div>
   );
