@@ -5,7 +5,7 @@ import FormResultsPerPage from './FormResultsPerPage';
 
 import logo from '../wink.png'
 
-const TopBar = ({setQuery, setPage, itemsPerPage, setItemsPerPage, fetchStatus}) => {
+const TopBar = ({setQuery, index, setIndex, setPage, itemsPerPage, setItemsPerPage, fetchStatus}) => {
   return (
     <Container className="TopBar fixed-top" fluid>
       <Row>
@@ -22,7 +22,7 @@ const TopBar = ({setQuery, setPage, itemsPerPage, setItemsPerPage, fetchStatus})
         </Col>
 
         <Col className="float-right" xs={"auto"}>
-          <FormResultsPerPage itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} />
+          <FormResultsPerPage index={index} setIndex={setIndex} setPage={setPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} />
         </Col>
 
       </Row>

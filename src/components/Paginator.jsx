@@ -14,12 +14,10 @@ const Paginator = ({setIndex, data, page, setPage, totalItems, itemsPerPage}) =>
     return;
   }
 
-  // console.log(itemsPerPage, totalItems, (totalItems + itemsPerPage) > (page * itemsPerPage));
+  console.log(itemsPerPage, totalItems, (totalItems + itemsPerPage) > (page * itemsPerPage));
 
   const handleClick = (moveToPage) => {
-    const test = itemsPerPage * (moveToPage - 1);
-    console.log(test);
-    setIndex(test);
+    setIndex(itemsPerPage * (moveToPage - 1));
     setPage(moveToPage);
   }
 

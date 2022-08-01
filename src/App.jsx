@@ -36,12 +36,12 @@ function App() {
         setData(() => []);
       }
     }
-    
+
     if (!query.length) {
       setData(() => []);
       return;
     }
-    
+
     fetchData();
   }, [query, itemsPerPage, page, index]);
 
@@ -57,6 +57,8 @@ function App() {
       />
       <TopBar
         setQuery={setQuery}
+        index={index}
+        setIndex={setIndex}
         setPage={setPage}
         itemsPerPage={itemsPerPage}
         setItemsPerPage={setItemsPerPage}
