@@ -1,6 +1,7 @@
+import { Col, Container, Image, Row, Spinner } from 'react-bootstrap';
+
 import FormSearchBar from './FormSearchBar';
 import FormResultsPerPage from './FormResultsPerPage';
-import { Col, Container, Image, Row, Spinner } from 'react-bootstrap';
 
 import logo from '../wink.png'
 
