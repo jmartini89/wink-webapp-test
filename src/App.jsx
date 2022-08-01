@@ -11,10 +11,9 @@ function App() {
   const apiUrl = "https://www.googleapis.com/books/v1/volumes?q=";
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
-  const [items, setItems] = useState([]);
-  const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
   const [fetchStatus, setFetchStatus] = useState({error: false, loading: false});
 
   useEffect(() => {
@@ -27,48 +26,47 @@ function App() {
 
         console.log(`${apiUrl}${query}&maxResults=${itemsPerPage}&startIndex=${index}`);
 
-        setTotalItems(() => Math.ceil(response.data.totalItems / currentPage));
-        setItems(() => response.data.items);
+        setData(() => response.data);
         setFetchStatus(() => ({error: false, loading: false}));
         window.scrollTo(0, 0);
       }
       catch(err) {
         console.error(err);
         setFetchStatus(() => ({error: true, loading: false}));
-        setTotalItems(() => 0);
+        setData(() => []);
       }
     }
     
     if (!query.length) {
-      setTotalItems(() => 0);
+      setData(() => []);
       return;
     }
     
     fetchData();
-  }, [query, itemsPerPage, currentPage, index]);
+  }, [query, itemsPerPage, page, index]);
 
   return (
     <div>
       <Paginator
         setIndex={setIndex}
-        data={items}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalItems={totalItems}
+        data={data.items}
+        page={page}
+        setPage={setPage}
+        totalItems={data.totalItems}
         itemsPerPage={itemsPerPage}
       />
       <TopBar
         setQuery={setQuery}
-        setCurrentPage={setCurrentPage}
+        setPage={setPage}
         itemsPerPage={itemsPerPage}
         setItemsPerPage={setItemsPerPage}
         fetchStatus={fetchStatus}
       />
 
       <ResultsList
-        data={items}
+        data={data.items}
         queryLenght={query.length}
-        totalItems={totalItems}
+        totalItems={data.totalItems}
         fetchStatus={fetchStatus}
       />
 

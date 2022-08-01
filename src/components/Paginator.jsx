@@ -1,11 +1,11 @@
 import { Container, Row } from 'react-bootstrap';
 import Pagination from 'react-bootstrap/Pagination'
 
-const Paginator = ({setIndex, data, currentPage, setCurrentPage, totalItems, itemsPerPage}) => {
+const Paginator = ({setIndex, data, page, setPage, totalItems, itemsPerPage}) => {
   const maxIndexes = 5;
   const initIndex = (
-    currentPage > Math.ceil(maxIndexes / 2)
-    ? currentPage - Math.ceil(maxIndexes / 2)
+    page > Math.ceil(maxIndexes / 2)
+    ? page - Math.ceil(maxIndexes / 2)
     : 0
   );
   let items = [];
@@ -14,23 +14,23 @@ const Paginator = ({setIndex, data, currentPage, setCurrentPage, totalItems, ite
     return;
   }
 
-  // console.log(itemsPerPage, totalItems, (totalItems + itemsPerPage) > (currentPage * itemsPerPage));
+  // console.log(itemsPerPage, totalItems, (totalItems + itemsPerPage) > (page * itemsPerPage));
 
   const handleClick = (moveToPage) => {
     const test = itemsPerPage * (moveToPage - 1);
     console.log(test);
     setIndex(test);
-    setCurrentPage(moveToPage);
+    setPage(moveToPage);
   }
 
   const setButton = (number, moveToPage, label) => {
     return (
       <Pagination.Item
         key={number}
-        active={label ? false : number === currentPage}
+        active={label ? false : number === page}
         disabled={
           !((totalItems + itemsPerPage) > (number * itemsPerPage))
-          || (number === 0 && currentPage === 1)
+          || (number === 0 && page === 1)
         }
         activeLabel={false}
         onClick={() => handleClick(moveToPage)}
@@ -40,11 +40,11 @@ const Paginator = ({setIndex, data, currentPage, setCurrentPage, totalItems, ite
     );
   }
 
-  items.push(setButton(initIndex, currentPage - 1, "<"));
+  items.push(setButton(initIndex, page - 1, "<"));
   for (let number = 1; number <= maxIndexes; number++) {
     items.push(setButton(initIndex + number, initIndex + number, ""));
   }
-  items.push(setButton(initIndex + maxIndexes + 1, currentPage + 1, ">"));
+  items.push(setButton(initIndex + maxIndexes + 1, page + 1, ">"));
 
   return (
     <Container>
