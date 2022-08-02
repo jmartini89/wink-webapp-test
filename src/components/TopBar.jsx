@@ -35,7 +35,7 @@ const TopBar = ({setQuery, index, setIndex, setPage, itemsPerPage, setItemsPerPa
         </Col>
       </Row>
     </Container>
-  )
+  );
 }
 
 export default TopBar;

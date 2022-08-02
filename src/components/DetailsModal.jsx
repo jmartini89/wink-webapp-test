@@ -50,7 +50,7 @@ const DetailsModal = ({bookData, setShow}) => {
 
       </Modal>
     </>
-  )
+  );
 }
 
 export default DetailsModal;

@@ -4,11 +4,8 @@ import Pagination from 'react-bootstrap/Pagination'
 const Paginator = ({setIndex, page, setPage, itemsPerPage}) => {
   const items = [];
   const maxIndexes = 5;
-  const startIndex = (
-    page > Math.ceil(maxIndexes / 2)
-    ? page - Math.ceil(maxIndexes / 2)
-    : 0
-  );
+  const startIndex = ((page > Math.ceil(maxIndexes / 2)) ? (page - Math.ceil(maxIndexes / 2)) : 0);
+
   const handleClick = (moveToPage) => {
     setIndex(itemsPerPage * (moveToPage - 1));
     setPage(moveToPage);
