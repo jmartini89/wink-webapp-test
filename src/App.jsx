@@ -10,10 +10,10 @@ import './App.css';
 function App() {
   const apiUrl = "https://www.googleapis.com/books/v1/volumes?q=";
   const [query, setQuery] = useState("");
-  const [index, setIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
+  const [index, setIndex] = useState(0);
+  const [page, setPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [fetchStatus, setFetchStatus] = useState({error: false, loading: false});
 
   useEffect(() => {
@@ -23,10 +23,7 @@ function App() {
         const response = await axios.get(
           `${apiUrl}${query}&maxResults=${itemsPerPage}&startIndex=${index}`
         );
-
-        console.log(`${apiUrl}${query}&maxResults=${itemsPerPage}&startIndex=${index}`);
-
-        setData(() => response.data);
+        setData(response.data);
         setFetchStatus(() => ({error: false, loading: false}));
         window.scrollTo(0, 0);
       }
@@ -47,14 +44,6 @@ function App() {
 
   return (
     <div>
-      <Paginator
-        setIndex={setIndex}
-        data={data.items}
-        page={page}
-        setPage={setPage}
-        totalItems={data.totalItems}
-        itemsPerPage={itemsPerPage}
-      />
       <TopBar
         setQuery={setQuery}
         index={index}
@@ -64,15 +53,20 @@ function App() {
         setItemsPerPage={setItemsPerPage}
         fetchStatus={fetchStatus}
       />
-
       <ResultsList
         data={data.items}
         queryLenght={query.length}
-        totalItems={data.totalItems}
+        totalItems={parseInt(data.totalItems)}
         fetchStatus={fetchStatus}
       />
-
-
+      <Paginator
+        setIndex={setIndex}
+        data={data.items}
+        page={page}
+        setPage={setPage}
+        totalItems={parseInt(data.totalItems)}
+        itemsPerPage={itemsPerPage}
+      />
     </div>
   );
 }

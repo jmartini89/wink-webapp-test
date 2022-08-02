@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Form, FormControl } from 'react-bootstrap';
 
-const FormSearchBar = ({setQuery, setPage}) => {
+const FormSearchBar = ({setQuery, setPage, setIndex}) => {
   const [queryDebounce, setQueryDebounce] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setQuery(() => queryDebounce);
       setPage(() => 1);
+      setIndex(() => 0);
     }, 500);
     return () => clearTimeout(timer);
-  }, [queryDebounce, setQuery, setPage]);
+  }, [queryDebounce, setQuery, setPage, setIndex]);
 
   return (
     <Form>

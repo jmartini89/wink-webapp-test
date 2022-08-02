@@ -9,9 +9,12 @@ const TopBar = ({setQuery, index, setIndex, setPage, itemsPerPage, setItemsPerPa
   return (
     <Container className="TopBar fixed-top" fluid>
       <Row>
-
         <Col xs={true}>
-          <FormSearchBar setQuery={setQuery} setPage={setPage}/>
+          <FormSearchBar
+            setQuery={setQuery}
+            setPage={setPage}
+            setIndex={setIndex}
+          />
         </Col>
 
         <Col xs={2}>
@@ -22,9 +25,14 @@ const TopBar = ({setQuery, index, setIndex, setPage, itemsPerPage, setItemsPerPa
         </Col>
 
         <Col className="float-right" xs={"auto"}>
-          <FormResultsPerPage index={index} setIndex={setIndex} setPage={setPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} />
+          <FormResultsPerPage
+            index={index}
+            setIndex={setIndex}
+            setPage={setPage}
+            itemsPerPage={itemsPerPage}
+            setItemsPerPage={setItemsPerPage}
+          />
         </Col>
-
       </Row>
     </Container>
   )
