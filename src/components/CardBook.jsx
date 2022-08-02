@@ -16,9 +16,9 @@ const CardBook = ({item, setShow, index, setItemIndex}) => {
       onClick={() => handleClick()}
     >
       <Card border="light">
-        <Card.Header as="h5">{book.title}</Card.Header>
+        <Card.Header as="h5" className="font-weight-bold text-primary">{book.title}</Card.Header>
         <Card.Body>
-          <Card.Text className="CardDescription">{book.description ? book.description : "No description provided"}</Card.Text>
+            <Card.Text className="CardDescription">{book.description ? book.description : "No description provided"}</Card.Text>
         </Card.Body>
       </Card>
     </Container>
