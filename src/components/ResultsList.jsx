@@ -4,15 +4,12 @@ import { Container } from 'react-bootstrap';
 import CardBook from './CardBook';
 import DetailsModal from "./DetailsModal";
 
-const ResultsList = ({data, queryLenght, totalItems, fetchStatus}) => {
+const ResultsList = ({data, fetchStatus}) => {
   const [show, setShow] = useState(false);
   const [itemIndex, setItemIndex] = useState(0);
 
   if (fetchStatus.error) {
     return <h4>Something went wrong!</h4>;
-  }
-  else if (!queryLenght || !totalItems || !data) {
-    return null;
   }
 
   return (

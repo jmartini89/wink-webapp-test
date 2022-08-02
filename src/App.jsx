@@ -53,20 +53,21 @@ function App() {
         setItemsPerPage={setItemsPerPage}
         fetchStatus={fetchStatus}
       />
-      <ResultsList
-        data={data.items}
-        queryLenght={query.length}
-        totalItems={parseInt(data.totalItems)}
-        fetchStatus={fetchStatus}
-      />
-      <Paginator
-        setIndex={setIndex}
-        data={data.items}
-        page={page}
-        setPage={setPage}
-        totalItems={parseInt(data.totalItems)}
-        itemsPerPage={itemsPerPage}
-      />
+      {query.length && data.items ?
+        <>
+          <ResultsList
+            data={data.items}
+            fetchStatus={fetchStatus}
+          />
+          <Paginator
+            setIndex={setIndex}
+            page={page}
+            setPage={setPage}
+            itemsPerPage={itemsPerPage}
+          />
+        </>
+        : null
+      }
     </div>
   );
 }
