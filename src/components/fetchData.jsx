@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const dataFetch = async (query, index, itemsPerPage, setData, setFetchStatus) => {
+const fetchData = async (query, index, itemsPerPage, setData, setFetchStatus) => {
   const apiUrl = "https://www.googleapis.com/books/v1/volumes?q=";
 
   try {
@@ -20,4 +20,4 @@ const dataFetch = async (query, index, itemsPerPage, setData, setFetchStatus) =>
   }
 }
 
-export default dataFetch;
+export default fetchData;

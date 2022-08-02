@@ -4,7 +4,7 @@ import TopBar from './components/TopBar';
 import ResultsList from './components/ResultsList';
 import Paginator from './components/Paginator';
 
-import dataFetch from './components/dataFetch';
+import fetchData from './components/fetchData';
 
 import './App.css';
 
@@ -22,7 +22,7 @@ function App() {
       setData(() => []);
       return;
     }
-    dataFetch(query, index, itemsPerPage, setData, setFetchStatus);
+    fetchData(query, index, itemsPerPage, setData, setFetchStatus);
   }, [query, index, itemsPerPage]);
 
   return (
