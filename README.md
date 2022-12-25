@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# WiNK Web Application Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## From zero to webdev
 
-## Available Scripts
+In summer 2022 I've been invited by WiNK to partecipate a selection process: I agreed.</br>
 
-In the project directory, you can run:
+They asked me to solve a specific exercise in 7 days, build a webapp: I panicked.</br>
 
-### `npm start`
+This repository is the result of an intensive 24/7 rush in learning JS, ReactJS, RESTful APIs and anything webdev related from scratch.</br>
+As a first time ever experience with such technologies, I think it's not that bad.</br>
+I landed the job.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## The Exercise
 
-### `npm test`
+### Purpose of the exercise
+To evaluate code organization and style and network management.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Request
+Create a responsive single page application in React or Angular.
+Use this endpoint `https://www.googleapis.com/books/v1/volumes?q={search terms}` and
+show the results of the GET call.
+Implement the page with a search bar and pagination of results using API parameters.
+The number of the pages is dynamic and depends on the total number of elements.
+The maximum limit of shown elements can be changed, accepted values are [5, 10, 15, 20].
+Implement a paginator to change pages.
+When you click on a book you have to show the detail page that contains the information
+of the book and its link (infoLink).
 
-### `npm run build`
+### Supplied material
+- API documentation:
+https://developers.google.com/books/docs/v1/reference/volumes/list
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Required
+-  In the list view, every row should truncate the description to 2 lines with “...”
+-  Search is live, so you have to update the results for every new character inserted.
+-  Use Bootstrap 4 and do a full responsive layout.
+-  Share your finished app with us via GitHub URL and ideally host it on CodeSandbox.
+You can easily import a GitHub project into CodeSandbox.
+Good to have
+-  Customize the Bootstrap theme colors using Sass
+-  Use Redux
+-  Use Typescript as language
