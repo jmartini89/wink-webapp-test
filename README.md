@@ -10,8 +10,6 @@ This repository is the result of an intensive 24/7 rush in learning JS, ReactJS,
 As a first time ever experience with such technologies, I think it's not that bad.</br>
 I landed the job.
 
-#
-
 ## The Exercise
 
 ### Purpose of the exercise
